@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Form = ({ onChange, onSubmit, name, newtodo }) => {
+const Form = ({ onChange, onSubmit, name, newtodo, durVal }) => {
   return (
     <form style={{ marginBottom: '2em' }} onSubmit={onSubmit}>
       {'Name => '}
@@ -17,6 +17,14 @@ const Form = ({ onChange, onSubmit, name, newtodo }) => {
         placeholder='Type Todo'
         name='newtodo'
         value={newtodo}
+        type='text'
+      />
+      {'Time Limit => '}
+      <input
+        onChange={onChange}
+        placeholder='in min'
+        name='durVal'
+        value={durVal}
         type='text'
       />
       <button type='submit'>Add</button>

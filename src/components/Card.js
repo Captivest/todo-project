@@ -1,7 +1,8 @@
 import React from 'react'
 import { Card, Button, CardTitle, CardText } from 'reactstrap'
 
-const TODO = ({ style, head, ti = [] }) => {
+const TODO = ({ style, head, ti = [], dur = [] }) => {
+  const lit = ti.map((t, i) => <li>{`${t} ------- ${dur[i]}`}</li>)
   return (
     <div>
       <Card
@@ -11,11 +12,7 @@ const TODO = ({ style, head, ti = [] }) => {
       >
         <CardTitle>{head}</CardTitle>
         <CardText>
-          <ul>
-            {ti.map(item => (
-              <li>{item}</li>
-            ))}
-          </ul>
+          <ul>{lit}</ul>
         </CardText>
         <Button>Button</Button>
       </Card>
