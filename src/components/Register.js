@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import eobj from './data'
+import history from './history'
 
 const RegForm = ({ onChange, onSubmit, username, org, check }) => {
   return (
@@ -49,7 +50,7 @@ export default class Register extends Component {
       }
       neobj = [...neobj, d]
       this.setState({ eobj: neobj })
-      console.log(neobj)
+      history.push('/')
     }
   }
 
