@@ -38,7 +38,7 @@ export default class Main extends Component {
       let newLi = [...this.state.todoObj]
       newLi = newLi.map(l => ({
         ...l,
-        dV: [...l.dV].map(d => (d > 1 ? d - 1 : 0))
+        dV: [...l.dV].map(d => (d > 1 ? d - 1 : 'Not Done'))
       }))
       this.setState({ todoObj: newLi })
       if (newLi.every(lt => lt.dV.every(lti => lti === 0))) {
@@ -83,7 +83,8 @@ export default class Main extends Component {
           style={{
             display: 'grid',
             gridGap: '2em',
-            gridTemplateColumns: 'repeat(auto-fit,minmax(250px,1fr))'
+            gridTemplateColumns: 'repeat(auto-fit,minmax(250px,1fr))',
+            gridAutoFlow: 'dense'
           }}
         >
           {newObj}

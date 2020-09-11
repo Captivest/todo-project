@@ -1,11 +1,9 @@
-import React from 'react';
-import Main from './components/MainComponent'
-import './App.css';
+import React from 'react'
+import HomePage from './components/HomePage'
+import './App.css'
 
-function App() {
-  return (
-   <Main/>
-  );
+function App () {
+  return <HomePage />
 }
 
-export default App;
+export default App
