@@ -2,81 +2,90 @@ import React, { Component } from 'react'
 import { Container } from 'reactstrap'
 import TODO from './Card'
 import Form from './Form'
-
-const todoObj = [
-  {
-    name: 'Harshit',
-    todos: ['DO THIS', 'DO THAT'],
-    dV: [5, 10]
-  },
-  {
-    name: 'Aniket',
-    todos: ['DO THIS', 'DO THAT'],
-    dV: [5, 10]
-  },
-  {
-    name: 'Swapnil',
-    todos: ['DO THIS', 'DO THAT'],
-    dV: [5, 10]
-  },
-  {
-    name: 'Subhash',
-    todos: ['DO THIS', 'DO THAT'],
-    dV: [5, 10]
-  }
-]
+import axios from 'axios'
 
 export default class Main extends Component {
   constructor (props) {
     super(props)
-    this.state = { todoObj }
+    this.state = { todos: [] }
     this.submit = this.submit.bind(this)
   }
 
   componentDidMount () {
-    let rep = setInterval(() => {
-      let newLi = [...this.state.todoObj]
-      newLi = newLi.map(l => ({
-        ...l,
-        dV: [...l.dV].map(d => (d > 1 ? d - 1 : 'Not Done'))
-      }))
-      this.setState({ todoObj: newLi })
-      if (newLi.every(lt => lt.dV.every(lti => lti === 0))) {
-        clearInterval(rep)
-      }
-    }, 1000)
+    const porg = this.props.match.params.org
+    axios
+      .get(`http://localhost:4000/todo/org?isadmin=1&member_of_org=${porg}`)
+      .then(res => {
+        console.log(res.data)
+        var data = []
+        var tmpd = [...res.data.data]
+        for (let i = 0; i < tmpd.length - 1; i += 2) {
+          data = [...data, { user: tmpd[i], todo: tmpd[i + 1] }]
+        }
+        data = data.filter(k => k.todo.length !== 0)
+        this.setState({ todos: data })
+        console.log(data)
+      })
   }
 
   submit (e) {
     e.preventDefault()
-    var newArr = [...this.state.todoObj]
-    const ind = newArr.findIndex(o => o.name === this.state.name)
+    const porg = this.props.match.params.org
+    var newArr = [...this.state.todos]
+    console.log(newArr)
+    const ind = newArr.findIndex(
+      o => o.user[0].uid === Number(this.state.userid)
+    )
     if (ind > -1) {
-      newArr[ind].todos = [...newArr[ind].todos, this.state.newtodo]
-      newArr[ind].dV = [...newArr[ind].dV, Number(this.state.durVal)]
-    } else {
-      const newObj = {
-        name: this.state.name,
-        todos: [this.state.newtodo],
-        dV: [Number(this.state.durVal)]
+      const td = {
+        userid: Number(this.state.userid),
+        title: this.state.title,
+        body: this.state.body,
+        time_rem: this.state.durVal
       }
-      newArr = [...this.state.todoObj, newObj]
+      console.log(td)
+      axios.post('http://localhost:4000/todo', td).then(() => {
+        axios
+          .get(`http://localhost:4000/todo/org?isadmin=1&member_of_org=${porg}`)
+          .then(res => {
+            var data = []
+            var tmpd = [...res.data.data]
+            for (let i = 0; i < tmpd.length - 1; i += 2) {
+              data = [...data, { user: tmpd[i], todo: tmpd[i + 1] }]
+            }
+            data = data.filter(k => k.todo.length !== 0)
+            console.log(data)
+            this.setState({
+              todos: data,
+              userid: '',
+              title: '',
+              body: '',
+              durVal: ''
+            })
+          })
+      })
+    } else {
+      console.log('Member Not found')
+      this.setState({ userid: '', title: '', body: '', durVal: '' })
     }
-    this.setState({ todoObj: newArr, name: '', newtodo: '', durVal: '' })
   }
-
   render () {
-    const { name, newtodo, durVal } = this.state
-    const newObj = this.state.todoObj.map(t => (
-      <TODO head={t.name} ti={t.todos.map(ti => ti)} dur={t.dV.map(d => d)} />
+    const { title, userid, body, durVal } = this.state
+    const newObj = this.state.todos.map(t => (
+      <TODO
+        head={`${t.user[0].fname} ${t.user[0].lname}`}
+        ti={t.todo.map(ti => ti.body)}
+        dur={t.todo.map(d => d.time_rem)}
+      />
     ))
     return (
       <Container fluid>
         <Form
           onChange={e => this.setState({ [e.target.name]: e.target.value })}
           onSubmit={this.submit}
-          name={name}
-          newtodo={newtodo}
+          userid={userid}
+          title={title}
+          body={body}
           durVal={durVal}
         />
         <div

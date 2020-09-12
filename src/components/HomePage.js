@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import history from './history'
-import eobj from './data'
+import axios from 'axios'
 
 const MainForm = ({ onChange, onSubmit, username, org }) => {
   return (
@@ -30,23 +30,31 @@ const MainForm = ({ onChange, onSubmit, username, org }) => {
 export default class HomePage extends Component {
   constructor (props) {
     super(props)
-    this.state = { eobj }
+    this.state = { username: '', member_of_org: '' }
     this.submit = this.submit.bind(this)
   }
 
   submit (e) {
     e.preventDefault()
-    var neobj = [...this.state.eobj]
-    const ind = neobj.findIndex(
-      i => i.name === this.state.username && i.admin === true
-    )
-    if (ind > -1) return history.push('/dashboard')
-    else return history.push(`/single/${this.state.username} ${this.state.org}`)
+    const user = {
+      username: this.state.username,
+      member_of_org: this.state.org
+    }
+    axios.post('http://localhost:4000/login', user).then(res => {
+      console.log(res.data)
+      if (res.data.data.length === 0) {
+        this.setState({ username: '', org: '' })
+      } else if (res.data.data[0].isadmin === 1) {
+        return history.push(`/dashboard/${this.state.org}`)
+      } else
+        return history.push(`/single/${this.state.username} ${this.state.org}`)
+    })
+    /* if (ind > -1) return history.push('/dashboard')
+    else return history.push(`/single/${this.state.username} ${this.state.org}`) */
   }
 
   render () {
     const { username, org } = this.state
-    console.log(this.props)
     return (
       <div>
         <h1>Work Management System</h1>

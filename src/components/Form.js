@@ -1,22 +1,30 @@
 import React from 'react'
 
-const Form = ({ onChange, onSubmit, name, newtodo, durVal }) => {
+const Form = ({ onChange, onSubmit, title, userid, body, durVal }) => {
   return (
     <form style={{ marginBottom: '2em' }} onSubmit={onSubmit}>
-      {'Name => '}
+      {'Userid => '}
       <input
         onChange={onChange}
-        placeholder='Name'
-        name='name'
-        value={name}
+        placeholder='userid'
+        name='userid'
+        value={userid}
+        type='text'
+      />{' '}
+      {'title => '}
+      <input
+        onChange={onChange}
+        placeholder='ttitle'
+        name='title'
+        value={title}
         type='text'
       />{' '}
       {'NewTodo => '}
       <input
         onChange={onChange}
         placeholder='Type Todo'
-        name='newtodo'
-        value={newtodo}
+        name='body'
+        value={body}
         type='text'
       />
       {'Time Limit => '}
