@@ -14,7 +14,7 @@ export default class Routes extends Component {
           <Route path='/' exact component={HomePage} />
           <Route path='/dashboard/:org' exact component={MainComponent} />
           <Route path='/register' exact component={Register} />
-          <Route path='/single/:name :org' exact component={Single} />
+          <Route path='/single/:uid :name :org' exact component={Single} />
         </Switch>
       </Router>
     )
