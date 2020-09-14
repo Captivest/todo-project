@@ -4,26 +4,42 @@ import axios from 'axios'
 export default class Single extends Component {
   constructor (props) {
     super(props)
-    this.state = { todo: [] }
+    this.state = { todo: [], uid: '', fn: '', ln: '' }
   }
   componentDidMount () {
-    const pid = this.props.match.params.uid
+    console.log(this.props)
+    let pname = this.props.match.params.name
+    let porg = this.props.match.params.org
     axios
-      .get(`http://localhost:4000/todo?userid=${pid}`)
-      .then(res => {
-        const newtd = [...res.data.data]
-        this.setState({ todo: newtd })
+      .post('http://localhost:4000/login', {
+        username: pname,
+        member_of_org: porg
       })
-      .catch(err => {
-        this.setState({ todo: [] })
+      .then(res => {
+        console.log(pname, porg)
+        let uid = res.data.data[0].userid
+        let firstname = res.data.data[0].firstname
+        let lastname = res.data.data[0].lastname
+        axios
+          .get(`http://localhost:4000/todo?userid=${uid}`)
+          .then(res => {
+            const newtd = [...res.data.data]
+            this.setState({
+              todo: newtd,
+              uid: uid,
+              fn: firstname,
+              ln: lastname
+            })
+          })
+          .catch(err => {
+            this.setState({ todo: [], uid: '', fn: '', ln: '' })
+          })
       })
   }
 
   render () {
-    console.log(this.props)
-    const { params } = this.props.match
-    const { name, org } = params
-    const { todo } = this.state
+    const { org } = this.props.match.params
+    const { todo, fn, ln } = this.state
     var todos = []
     const tdl = todo.length
     if (tdl === 0) {
@@ -34,7 +50,7 @@ export default class Single extends Component {
     return (
       <div>
         <h1>
-          {name} && {org}
+          {`${fn} ${ln}`} works in department - {org}
         </h1>
         <ul>{todos}</ul>
       </div>

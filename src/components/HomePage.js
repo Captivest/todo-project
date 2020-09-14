@@ -2,16 +2,9 @@ import React, { Component } from 'react'
 import history from './history'
 import axios from 'axios'
 
-const MainForm = ({ onChange, onSubmit, username, userid, org }) => {
+const MainForm = ({ onChange, onSubmit, username, org }) => {
   return (
     <form onSubmit={onSubmit}>
-      <input
-        onChange={onChange}
-        placeholder='User ID'
-        name='userid'
-        value={userid}
-        type='text'
-      />
       <input
         onChange={onChange}
         placeholder='Username'
@@ -37,7 +30,7 @@ const MainForm = ({ onChange, onSubmit, username, userid, org }) => {
 export default class HomePage extends Component {
   constructor (props) {
     super(props)
-    this.state = { username: '', member_of_org: '', userid: '' }
+    this.state = { username: '', member_of_org: '' }
     this.submit = this.submit.bind(this)
   }
 
@@ -50,15 +43,13 @@ export default class HomePage extends Component {
     axios.post('http://localhost:4000/login', user).then(res => {
       console.log(res.data)
       if (res.data.data.length === 0) {
-        this.setState({ username: '', org: '', userid: '' })
+        this.setState({ username: '', org: '' })
       } else if (res.data.data[0].isadmin === 1) {
         console.log('dash works')
         return history.push(`/dashboard/${this.state.org}`)
       } else {
         console.log('Single works')
-        return history.push(
-          `/single/${this.state.userid} ${this.state.username} ${this.state.org}`
-        )
+        return history.push(`/single/${this.state.username} ${this.state.org}`)
       }
     })
     /* if (ind > -1) return history.push('/dashboard')
@@ -66,7 +57,7 @@ export default class HomePage extends Component {
   }
 
   render () {
-    const { username, org, userid } = this.state
+    const { username, org } = this.state
     return (
       <div>
         <h1>Work Management System</h1>
@@ -75,7 +66,6 @@ export default class HomePage extends Component {
           onSubmit={this.submit}
           username={username}
           org={org}
-          userid={userid}
         />
       </div>
     )
