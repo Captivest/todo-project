@@ -84,8 +84,9 @@ export default class Main extends Component {
     const { title, userid, body, durVal } = this.state
     const newObj = this.state.todos.map(t => (
       <TODO
+        uid={t.user[0].uid}
         head={`${t.user[0].fname} ${t.user[0].lname}`}
-        ti={t.todo.map(ti => ti.body)}
+        ti={t.todo.map(ti => ti)}
         dur={t.todo.map(d => d.time_rem)}
       />
     ))

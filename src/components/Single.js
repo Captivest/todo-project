@@ -5,6 +5,7 @@ export default class Single extends Component {
   constructor (props) {
     super(props)
     this.state = { todo: [], uid: '', fn: '', ln: '' }
+    this.delete = this.delete.bind(this)
   }
   componentDidMount () {
     console.log(this.props)
@@ -23,6 +24,7 @@ export default class Single extends Component {
         axios
           .get(`http://localhost:4000/todo?userid=${uid}`)
           .then(res => {
+            console.log(res.data.data)
             const newtd = [...res.data.data]
             this.setState({
               todo: newtd,
@@ -37,6 +39,20 @@ export default class Single extends Component {
       })
   }
 
+  delete (aid) {
+    const del_td = { userid: this.state.uid, assign_id: aid }
+    axios
+      .delete(`http://localhost:4000/todo/org`, { params: del_td })
+      .then(() => {
+        axios
+          .get(`http://localhost:4000/todo?userid=${this.state.uid}`)
+          .then(res => {
+            this.setState({ todo: res.data.data })
+            console.log(this.state)
+          })
+      })
+  }
+
   render () {
     const { org } = this.props.match.params
     const { todo, fn, ln } = this.state
@@ -45,7 +61,13 @@ export default class Single extends Component {
     if (tdl === 0) {
       return <h1>No Employee of this name</h1>
     } else {
-      todos = todo.map(t => <li>{`->${t.body}`}</li>)
+      console.log(todo)
+      todos = todo.map(t => (
+        <li>
+          {`->${t.body}`}
+          <button onClick={() => this.delete(t.assign_id)}>Done</button>
+        </li>
+      ))
     }
     return (
       <div>
