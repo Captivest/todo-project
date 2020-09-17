@@ -2,7 +2,7 @@ import React from 'react'
 
 const Form = ({ onChange, onSubmit, title, userid, body, durVal }) => {
   return (
-    <form style={{ marginBottom: '2em' }} onSubmit={onSubmit}>
+    <form className='form2' style={{ marginBottom: '2em' }} onSubmit={onSubmit}>
       {'Userid => '}
       <input
         onChange={onChange}

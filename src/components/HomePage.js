@@ -5,7 +5,7 @@ import '../views/homepage.css'
 
 const MainForm = ({ onChange, onSubmit, username, org }) => {
   return (
-    <form onSubmit={onSubmit}>
+    <form className='form1' onSubmit={onSubmit}>
       <input
         onChange={onChange}
         placeholder='Username'
@@ -65,7 +65,6 @@ export default class HomePage extends Component {
       <div className='main'>
         <div className='header'>
           <h1>Work Management System</h1>
-          <button>Head Inside</button>
         </div>
 
         <MainForm

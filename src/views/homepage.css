@@ -1,21 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,400;1,700&display=swap');
 body {
+  overflow: hidden;
+  font-family: 'Karla', sans-serif;
+}
+.main {
+  display: flex;
+  height: 950px;
+  width: inherit;
+  justify-content: space-around;
+  align-items: center;
   padding: 0;
   background-image: url(https://images.unsplash.com/photo-1598985348522-aab254d10928?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1351&q=80);
   background-size: 100vw 100vh;
   background-repeat: no-repeat;
   position: sticky;
-}
-#root {
-  height: 800px;
-  width: inherit;
-}
-
-.main {
-  display: flex;
-  height: inherit;
-  width: inherit;
-  justify-content: space-around;
-  align-items: center;
+  overflow: hidden;
 }
 
 .header > h1 {
@@ -44,7 +43,7 @@ body {
   color: white;
   background-color: rgb(243, 147, 24);
 }
-form {
+.form1 {
   display: block;
   margin: 300px 0 0 0;
   padding: 0;
@@ -52,7 +51,7 @@ form {
   width: 300px;
 }
 
-form > input {
+.form1 > input {
   padding: 8px;
   width: inherit;
   margin: 10px 0;
@@ -60,18 +59,18 @@ form > input {
   border: 2px solid rgb(243, 147, 21);
 }
 
-form > input:focus {
+.form1 > input:focus {
   border: 2px solid yellow;
 }
 
-form > button {
+.form1 > button {
   color: rgb(226, 138, 24);
   padding: 5px 0;
   border-radius: 5px;
   border: 2px solid rgb(243, 147, 21);
   transition: 0.2s;
 }
-form > button:hover {
+.form1 > button:hover {
   color: white;
   background-color: rgb(243, 147, 21);
   padding: 5px 0;
@@ -79,15 +78,15 @@ form > button:hover {
   border: 2px solid rgb(243, 147, 21);
 }
 
-form > button:active {
+.form1 > button:active {
   background-color: rgb(202, 122, 17);
 }
 
-form > button:nth-of-type(1) {
+.form1 > button:nth-of-type(1) {
   width: 145px;
   margin: 10px 5px 0 0;
 }
-form > button:nth-of-type(2) {
+.form1 > button:nth-of-type(2) {
   width: 145px;
   margin: 10px 0 0 5px;
 }
