@@ -36,10 +36,12 @@ export default class HomePage extends Component {
 
   submit (e) {
     e.preventDefault()
+    console.log(this.state)
     const user = {
       username: this.state.username,
       member_of_org: this.state.org
     }
+    console.log(user)
     axios.post('http://localhost:4000/login', user).then(res => {
       console.log(res.data)
       if (res.data.data.length === 0) {
@@ -62,7 +64,10 @@ export default class HomePage extends Component {
       <div>
         <h1>Work Management System</h1>
         <MainForm
-          onChange={e => this.setState({ [e.target.name]: e.target.value })}
+          onChange={e => {
+            this.setState({ [e.target.name]: e.target.value })
+            console.log(this.state)
+          }}
           onSubmit={this.submit}
           username={username}
           org={org}

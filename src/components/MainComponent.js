@@ -16,7 +16,6 @@ export default class Main extends Component {
     axios
       .get(`http://localhost:4000/todo/org?isadmin=1&member_of_org=${porg}`)
       .then(res => {
-        console.log(res.data)
         var data = []
         var tmpd = [...res.data.data]
         for (let i = 0; i < tmpd.length - 1; i += 2) {
@@ -33,14 +32,12 @@ export default class Main extends Component {
     axios
       .get(`http://localhost:4000/todo/org?isadmin=1&member_of_org=${porg}`)
       .then(res => {
-        console.log(res.data)
         var data_1 = []
         var tmpd_1 = [...res.data.data]
         for (let i = 0; i < tmpd_1.length - 1; i += 2) {
           data_1 = [...data_1, { user: tmpd_1[i], todo: tmpd_1[i + 1] }]
         }
         var newArr = [...data_1]
-        console.log(newArr)
         const ind = newArr.findIndex(
           o => o.user[0].uid === Number(this.state.userid)
         )
@@ -51,7 +48,6 @@ export default class Main extends Component {
             body: this.state.body,
             time_rem: this.state.durVal
           }
-          console.log(td)
           axios.post('http://localhost:4000/todo', td).then(() => {
             axios
               .get(
@@ -64,7 +60,6 @@ export default class Main extends Component {
                   data_2 = [...data_2, { user: tmpd_2[i], todo: tmpd_2[i + 1] }]
                 }
                 data_2 = data_2.filter(k => k.todo.length !== 0)
-                console.log(data_2)
                 this.setState({
                   todos: data_2,
                   userid: '',

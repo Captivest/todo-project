@@ -41,16 +41,14 @@ export default class Single extends Component {
 
   delete (aid) {
     const del_td = { userid: this.state.uid, assign_id: aid }
-    axios
-      .delete(`http://localhost:4000/todo/org`, { params: del_td })
-      .then(() => {
-        axios
-          .get(`http://localhost:4000/todo?userid=${this.state.uid}`)
-          .then(res => {
-            this.setState({ todo: res.data.data })
-            console.log(this.state)
-          })
-      })
+    axios.delete(`http://localhost:4000/todo`, { params: del_td }).then(() => {
+      axios
+        .get(`http://localhost:4000/todo?userid=${this.state.uid}`)
+        .then(res => {
+          this.setState({ todo: res.data.data })
+          console.log(this.state)
+        })
+    })
   }
 
   render () {
