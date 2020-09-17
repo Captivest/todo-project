@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import history from './history'
 import axios from 'axios'
+import '../views/homepage.css'
 
 const MainForm = ({ onChange, onSubmit, username, org }) => {
   return (
@@ -61,8 +62,12 @@ export default class HomePage extends Component {
   render () {
     const { username, org } = this.state
     return (
-      <div>
-        <h1>Work Management System</h1>
+      <div className='main'>
+        <div className='header'>
+          <h1>Work Management System</h1>
+          <button>Head Inside</button>
+        </div>
+
         <MainForm
           onChange={e => {
             this.setState({ [e.target.name]: e.target.value })

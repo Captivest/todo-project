@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import history from './history'
 
 export default class Single extends Component {
   constructor (props) {
@@ -57,7 +58,7 @@ export default class Single extends Component {
     var todos = []
     const tdl = todo.length
     if (tdl === 0) {
-      return <h1>No Employee of this name</h1>
+      return history.push('/')
     } else {
       console.log(todo)
       todos = todo.map(t => (

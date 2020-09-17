@@ -1,0 +1,93 @@
+body {
+  padding: 0;
+  background-image: url(https://images.unsplash.com/photo-1598985348522-aab254d10928?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1351&q=80);
+  background-size: 100vw 100vh;
+  background-repeat: no-repeat;
+  position: sticky;
+}
+#root {
+  height: 800px;
+  width: inherit;
+}
+
+.main {
+  display: flex;
+  height: inherit;
+  width: inherit;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.header > h1 {
+  color: rgb(255, 248, 248);
+  margin-bottom: 20px;
+  width: 480px;
+  padding-bottom: 15px;
+  border-bottom: 5px solid rgb(202, 122, 17);
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header > button {
+  color: rgb(226, 138, 24);
+  border: 2px solid rgb(226, 138, 24);
+  border-radius: 5px;
+  padding: 5px 90px;
+  transition: 0.2s;
+}
+
+.header > button:hover {
+  color: white;
+  background-color: rgb(243, 147, 24);
+}
+form {
+  display: block;
+  margin: 300px 0 0 0;
+  padding: 0;
+  height: 500px;
+  width: 300px;
+}
+
+form > input {
+  padding: 8px;
+  width: inherit;
+  margin: 10px 0;
+  border-radius: 5px;
+  border: 2px solid rgb(243, 147, 21);
+}
+
+form > input:focus {
+  border: 2px solid yellow;
+}
+
+form > button {
+  color: rgb(226, 138, 24);
+  padding: 5px 0;
+  border-radius: 5px;
+  border: 2px solid rgb(243, 147, 21);
+  transition: 0.2s;
+}
+form > button:hover {
+  color: white;
+  background-color: rgb(243, 147, 21);
+  padding: 5px 0;
+  border-radius: 5px;
+  border: 2px solid rgb(243, 147, 21);
+}
+
+form > button:active {
+  background-color: rgb(202, 122, 17);
+}
+
+form > button:nth-of-type(1) {
+  width: 145px;
+  margin: 10px 5px 0 0;
+}
+form > button:nth-of-type(2) {
+  width: 145px;
+  margin: 10px 0 0 5px;
+}
