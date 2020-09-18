@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Container } from 'reactstrap'
+import '../views/dashboard.css'
 import TODO from './Card'
 import Form from './Form'
 import axios from 'axios'
@@ -76,36 +76,52 @@ export default class Main extends Component {
       })
   }
   render () {
+    var rdlist = [...Array(this.state.todos.length)].map(
+      () => Math.ceil(Math.random() * 100) + 300
+    )
+    console.log(rdlist)
     const { title, userid, body, durVal } = this.state
-    const newObj = this.state.todos.map(t => (
+    const newObj = this.state.todos.map((t, i) => (
       <TODO
         uid={t.user[0].uid}
         head={`${t.user[0].fname} ${t.user[0].lname}`}
         ti={t.todo.map(ti => ti)}
         dur={t.todo.map(d => d.time_rem)}
+        height={rdlist[i]}
       />
     ))
+    var members = this.state.todos.map(m => (
+      <li>
+        <span>{m.user[0].uid}</span>
+        <p>{`${m.user[0].fname} ${m.user[0].lname}`}</p>
+      </li>
+    ))
+    members = [
+      <li>
+        <span>ID</span>
+        <p>Users</p>
+      </li>,
+      ...members
+    ]
     return (
-      <Container fluid>
-        <Form
-          onChange={e => this.setState({ [e.target.name]: e.target.value })}
-          onSubmit={this.submit}
-          userid={userid}
-          title={title}
-          body={body}
-          durVal={durVal}
-        />
-        <div
-          style={{
-            display: 'grid',
-            gridGap: '2em',
-            gridTemplateColumns: 'repeat(auto-fit,minmax(250px,1fr))',
-            gridAutoFlow: 'dense'
-          }}
-        >
-          {newObj}
+      <div className='main'>
+        <div className='members'>
+          <h2>{this.props.match.params.org}</h2>
+          <ul className='scroll'>{members}</ul>
         </div>
-      </Container>
+
+        <div className='content'>
+          <Form
+            onChange={e => this.setState({ [e.target.name]: e.target.value })}
+            onSubmit={this.submit}
+            userid={userid}
+            title={title}
+            body={body}
+            durVal={durVal}
+          />
+          <div className='masonry scroll'>{newObj}</div>
+        </div>
+      </div>
     )
   }
 }

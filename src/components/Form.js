@@ -2,24 +2,21 @@ import React from 'react'
 
 const Form = ({ onChange, onSubmit, title, userid, body, durVal }) => {
   return (
-    <form className='form2' style={{ marginBottom: '2em' }} onSubmit={onSubmit}>
-      {'Userid => '}
+    <form className='form2' onSubmit={onSubmit}>
       <input
         onChange={onChange}
-        placeholder='userid'
+        placeholder='User ID'
         name='userid'
         value={userid}
         type='text'
-      />{' '}
-      {'title => '}
+      />
       <input
         onChange={onChange}
-        placeholder='ttitle'
+        placeholder='Title'
         name='title'
         value={title}
         type='text'
-      />{' '}
-      {'NewTodo => '}
+      />
       <input
         onChange={onChange}
         placeholder='Type Todo'
@@ -27,15 +24,15 @@ const Form = ({ onChange, onSubmit, title, userid, body, durVal }) => {
         value={body}
         type='text'
       />
-      {'Time Limit => '}
+
       <input
         onChange={onChange}
-        placeholder='in min'
+        placeholder='Time Remaining (in hrs)'
         name='durVal'
         value={durVal}
         type='text'
       />
-      <button type='submit'>Add</button>
+      <button type='submit'>+</button>
     </form>
   )
 }

@@ -1,9 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,400;1,700&display=swap');
 body {
   overflow: hidden;
-  font-family: 'Karla', sans-serif;
 }
 .main {
+  font-family: 'Karla', sans-serif;
   display: flex;
   height: 950px;
   width: inherit;

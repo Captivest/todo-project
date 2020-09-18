@@ -1,6 +1,5 @@
 import React from 'react'
 import axios from 'axios'
-import { Card, Button, CardTitle } from 'reactstrap'
 
 export default class TODO extends React.Component {
   constructor (props) {
@@ -62,66 +61,52 @@ export default class TODO extends React.Component {
   }
 
   render () {
-    var { uid, head, dur = [] } = this.props
+    var { uid, head } = this.props
     const { bd, ch = 0 } = this.state
     const lit = this.state.todo.map((t, i) => (
       <li key={i}>
-        {`${t.body} ------- ${dur[i]}`}
-        <button onClick={() => this.updt(t)}>edit</button>
-        <button onClick={() => this.delete(uid, t.assign_id)}>del</button>
+        <p
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'flex-start'
+          }}
+        >
+          {`${t.body}`}
+          <span
+            style={{ fontSize: '1.2vh' }}
+          >{`Created on - ${t.time_cr}`}</span>
+        </p>
+        <span>
+          {`${t.time_rem} hrs`}
+          <button onClick={() => this.updt(t)}>Edit</button>
+          <button onClick={() => this.delete(uid, t.assign_id)}>Delete</button>
+        </span>
       </li>
     ))
-    const rand = () => Math.ceil(Math.random() * 3)
+
     if (ch === 1) {
       return (
-        <div>
-          <Card
-            body
-            inverse
-            style={{
-              backgroundColor: '#333',
-              borderColor: '#333',
-              margin: '0 0 20px',
-              gridRowEnd: `span ${rand()}`,
-              overflow: 'hidden'
-            }}
-          >
-            <CardTitle>{head}</CardTitle>
-            <form onSubmit={this.submit}>
-              <input
-                type='text'
-                placeholder='Update'
-                onChange={e =>
-                  this.setState({ [e.target.name]: e.target.value })
-                }
-                name='bd'
-                value={bd}
-              />
-              <button type='submit'>update</button>
-            </form>
-            <ul>{lit}</ul>
-            <Button>Button</Button>
-          </Card>
+        <div className='card' style={{ height: `${this.props.height}px` }}>
+          <h2>{head}</h2>
+          <form onSubmit={this.submit}>
+            <input
+              type='text'
+              placeholder='Update'
+              onChange={e => this.setState({ [e.target.name]: e.target.value })}
+              name='bd'
+              value={bd}
+            />
+            <button type='submit'>update</button>
+          </form>
+          <ul className='scroll'>{lit}</ul>
         </div>
       )
     } else {
       return (
-        <div>
-          <Card
-            body
-            inverse
-            style={{
-              backgroundColor: '#333',
-              borderColor: '#333',
-              margin: '0 0 20px',
-              gridRowEnd: `span ${rand()}`,
-              overflow: 'hidden'
-            }}
-          >
-            <CardTitle>{head}</CardTitle>
-            <ul>{lit}</ul>
-            <Button>Button</Button>
-          </Card>
+        <div className='card' style={{ height: `${this.props.height}px` }}>
+          <h2>{head}</h2>
+          <ul className='scroll'>{lit}</ul>
         </div>
       )
     }
