@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import history from './history'
-
+import '../views/single.css'
 export default class Single extends Component {
   constructor (props) {
     super(props)
@@ -47,7 +47,6 @@ export default class Single extends Component {
         .get(`http://localhost:4000/todo?userid=${this.state.uid}`)
         .then(res => {
           this.setState({ todo: res.data.data })
-          console.log(this.state)
         })
     })
   }
@@ -56,24 +55,30 @@ export default class Single extends Component {
     const { org } = this.props.match.params
     const { todo, fn, ln } = this.state
     var todos = []
-    const tdl = todo.length
-    if (tdl === 0) {
-      return history.push('/')
-    } else {
-      console.log(todo)
-      todos = todo.map(t => (
-        <li>
-          {`->${t.body}`}
+    todos = todo.map(t => (
+      <li>
+        <p>
+          {`${t.body}`}
+          <br />
+          <span>{`${t.time_cr}`}</span>
+        </p>
+        <span className='timebtn'>
+          <span>{`${t.time_rem} hrs`}</span>
           <button onClick={() => this.delete(t.assign_id)}>Done</button>
-        </li>
-      ))
-    }
+        </span>
+      </li>
+    ))
     return (
-      <div>
-        <h1>
-          {`${fn} ${ln}`} works in department - {org}
-        </h1>
-        <ul>{todos}</ul>
+      <div className='main3'>
+        <div className='header1'>
+          <h1>{org}</h1>
+          <button onClick={() => history.push('/')}>Log out</button>
+        </div>
+
+        <div className='card2'>
+          <h1>{`${fn} ${ln}`}</h1>
+          <ul className='scroll'>{todos}</ul>
+        </div>
       </div>
     )
   }

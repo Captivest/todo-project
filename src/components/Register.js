@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React, { Component } from 'react'
 import history from './history'
+import '../views/register.css'
 
 const RegForm = ({
   onChange,
@@ -12,7 +13,7 @@ const RegForm = ({
   check
 }) => {
   return (
-    <form onSubmit={onSubmit}>
+    <form className='form3' onSubmit={onSubmit}>
       <input
         onChange={onChange}
         placeholder='Firstname'
@@ -43,10 +44,14 @@ const RegForm = ({
       />
       <div onChange={check}>
         {<p>Admin:</p>}
-        {<p>Yes</p>}
-        <input type='radio' name='admin' value='1' />
-        {<p>No</p>}
-        <input type='radio' name='admin' value='0' />
+        <span>
+          {<p>Yes</p>}
+          <input type='radio' name='admin' value='1' />
+        </span>
+        <span>
+          {<p>No</p>}
+          <input type='radio' name='admin' value='0' />
+        </span>
       </div>
       <button type='submit'>SignUP</button>
     </form>
@@ -80,7 +85,7 @@ export default class Register extends Component {
   render () {
     const { username, lastname, firstname, org } = this.state
     return (
-      <div>
+      <div className='reg'>
         <h1>Registration</h1>
         <RegForm
           onChange={e => this.setState({ [e.target.name]: e.target.value })}

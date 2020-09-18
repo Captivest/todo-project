@@ -1,0 +1,131 @@
+@import url('https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,400;1,700&display=swap');
+
+.main3 {
+  font-family: 'Karla', sans-serif;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: inherit;
+  padding: 0;
+  background-image: url(https://images.unsplash.com/photo-1598985348522-aab254d10928?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1351&q=80);
+  background-size: 100vw 100vh;
+  background-repeat: no-repeat;
+  position: sticky;
+}
+
+.main3 > .header1 {
+  display: flex;
+  height: 5vh;
+  justify-content: space-around;
+  margin-bottom: 4vh;
+}
+
+.main3 > .header1 > h1 {
+  color: rgb(238, 164, 68);
+  border-bottom: 5px solid chocolate;
+  padding-bottom: 50px;
+}
+.main3 > .header1 > button {
+  border: 1px solid rgb(238, 164, 68);
+  padding: 0 3vh;
+  border-radius: 5px;
+  color: rgb(238, 164, 68);
+  background-color: azure;
+  transition: 0.3s;
+}
+
+.main3 > .header1 > button:hover {
+  color: azure;
+  background-color: rgb(238, 164, 68);
+}
+
+.card2 {
+  align-self: center;
+  background-color: rgba(82, 80, 77, 0.623);
+  width: 50vw;
+  height: 90vh;
+  border-radius: 30px;
+  padding: 0 4vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.card2 > h1 {
+  flex-basis: 10vh;
+  align-self: center;
+  height: 50px;
+  margin-top: 3vh;
+  font-weight: 700;
+  color: rgb(255, 214, 80);
+  letter-spacing: 2px;
+  border-bottom: 5px solid rgb(238, 149, 34);
+}
+
+.card2 > ul {
+  list-style: none;
+  padding-left: 10px;
+  margin-top: 80px;
+  overflow-y: scroll;
+}
+
+.card2 > ul > li {
+  display: flex;
+  justify-content: space-between;
+}
+
+.card2 > ul > li > p {
+  flex-basis: 50%;
+}
+.card2 > ul > li > .timebtn {
+  flex-basis: 50%;
+  margin-right: 20px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.card2 > ul > li > .timebtn > button {
+  border: 1px solid rgb(36, 247, 82);
+  border-radius: 5px;
+  margin-left: 20px;
+  padding: 0 20px;
+  color: rgb(36, 247, 82);
+  background-color: rgba(41, 40, 38, 0.986);
+  transition: 0.3s;
+  display: none;
+}
+
+.card2 > ul > li:hover > .timebtn > button {
+  display: block;
+}
+
+.card2 > ul > li > .timebtn > button:hover {
+  color: rgba(41, 40, 38, 0.986);
+  background-color: rgb(36, 247, 82);
+}
+
+.card2 > ul > li > .timebtn > span {
+  color: rgb(238, 149, 34);
+  font-size: 2vh;
+}
+.card2 > ul > li > p {
+  font-size: 3vh;
+  color: rgb(245, 201, 57);
+}
+
+.card2 > ul > li > p > span {
+  color: rgb(175, 153, 131);
+  font-size: 1.8vh;
+}
+
+.scroll::-webkit-scrollbar {
+  width: 6px;
+  background-color: rgba(71, 71, 71, 0.733);
+  border-radius: 10px;
+  box-shadow: inset;
+}
+
+.scroll::-webkit-scrollbar-thumb {
+  border-radius: 6px;
+  background-color: rgb(192, 133, 55);
+}

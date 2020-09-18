@@ -3,8 +3,8 @@ import { Router, Switch, Route } from 'react-router-dom'
 import HomePage from './HomePage'
 import MainComponent from './MainComponent'
 import Register from './Register'
-import Single from './Single'
 import history from './history'
+import Single from './Single'
 
 export default class Routes extends Component {
   render () {
@@ -14,7 +14,7 @@ export default class Routes extends Component {
           <Route path='/' exact component={HomePage} />
           <Route path='/dashboard/:org' exact component={MainComponent} />
           <Route path='/register' exact component={Register} />
-          <Route path='/single/:name :org' exact component={Single} />
+          <Route path='/single/:name-:org' exact component={Single} />
         </Switch>
       </Router>
     )

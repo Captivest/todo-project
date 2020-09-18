@@ -49,10 +49,11 @@ export default class HomePage extends Component {
         this.setState({ username: '', org: '' })
       } else if (res.data.data[0].isadmin === 1) {
         console.log('dash works')
-        return history.push(`/dashboard/${this.state.org}`)
+        return this.props.history.push(`/dashboard/${this.state.org}`)
       } else {
         console.log('Single works')
-        return history.push(`/single/${this.state.username} ${this.state.org}`)
+        console.log(this.state.username, this.state.org)
+        return history.push(`/single/${this.state.username}-${this.state.org}`)
       }
     })
     /* if (ind > -1) return history.push('/dashboard')

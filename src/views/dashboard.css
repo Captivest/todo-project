@@ -204,10 +204,12 @@ body {
   overflow-y: scroll;
 }
 .main > .members > h2 {
-  line-height: 90px;
   text-align: center;
   justify-self: center;
-  flex-basis: 11.2%;
+  padding: 3vh 0 3.4vh 0;
+
+  font-size: 3.45vh;
+  flex-basis: 3vh;
   border-bottom: 8px solid rgb(202, 122, 17);
 }
 .main > .members > ul > li {
